@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 public class ManagerTest {
@@ -6,17 +7,16 @@ public class ManagerTest {
     ProductRepository repository = new ProductRepository();
     Manager manager = new Manager(repository);
 
-    Product book1 = new Book(10, "Harry Potter",200, "Joanne Rowling");
-    Product book2 = new Book(20, "Generation P",300, "Pelevin");
-    Product book3 = new Book(3, "It",500, "King");
+    Product book1 = new Book(10, "Harry Potter", 200, "Joanne Rowling");
+    Product book2 = new Book(20, "Generation P", 300, "Pelevin");
+    Product book3 = new Book(3, "It", 500, "King");
     Product book4 = new Book(44, "Harry", 600, "Rowling");
     Product smarthphone1 = new Smartphone(5, "Samsung", 5000, "China");
     Product smarthphone2 = new Smartphone(666, "Iphone", 10_000, "China");
 
 
-
     @Test
-    public void shouldAddOneProduct () {
+    public void shouldAddOneProduct() {
 
         manager.add(book1);
 
@@ -29,7 +29,7 @@ public class ManagerTest {
     }
 
     @Test
-    public void shouldAddProducts () {
+    public void shouldAddProducts() {
 
         manager.add(book1);
         manager.add(smarthphone1);
@@ -44,7 +44,7 @@ public class ManagerTest {
     }
 
     @Test
-    public void shouldSearchByText () {
+    public void shouldSearchByText() {
 
         manager.add(book1);
         manager.add(book2);
@@ -59,7 +59,7 @@ public class ManagerTest {
     }
 
     @Test
-    public void shouldSearchByTextMoreOneResult () {
+    public void shouldSearchByTextMoreOneResult() {
 
         manager.add(book1);
         manager.add(book2);
@@ -74,7 +74,21 @@ public class ManagerTest {
     }
 
     @Test
-    public void shouldRemoveById () {
+    public void shouldSearchByTextNotFoundResult() {
+
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(book4);
+
+        Product[] actual = manager.searchBy("It");
+        Product[] expected = {};
+
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldRemoveById() {
 
         manager.add(book1);
         manager.add(book2);
@@ -85,7 +99,7 @@ public class ManagerTest {
         Product[] actual = {book2, book3, book4};
         Product[] expected = {book2, book3, book4};
 
-       assertArrayEquals(expected, actual);
+        assertArrayEquals(expected, actual);
 
     }
 

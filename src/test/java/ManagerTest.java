@@ -102,7 +102,19 @@ public class ManagerTest {
         assertArrayEquals(expected, actual);
 
     }
+    @Test
+    public void shouldThrowException() {
 
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(book3);
+        manager.add(book4);
+       // manager.removeById(500);
 
+        assertThrows(NotFoundException.class, () -> {
+           repository.remove(500);
+                });
+
+    }
 }
 
